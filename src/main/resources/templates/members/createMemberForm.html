@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout">
+<th:block layout:fragment="header" th:insert="@{fragments/header}"></th:block>
+
+<body>
+<th:block layout:fragment="nav" th:insert="@{/fragments/nav}"></th:block>
+
+<div class="p-3 mb-2 display-3 text-center join">회원가입</div>
+<div class="p-3 mb-2 bg-light text-dark">
+	<div class="container">
+		<form name="form" th:action="@{/members/new}" th:object="${memberForm}" method="post" class="add-member">
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">아이디</label>
+				<div class="col-sm-5">
+					<input type="text" th:field="*{userId}" class="form-control text-bg-light p-2" placeholder="아이디를 입력하세요">
+					<span class="validationError" th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"></span>
+				</div>
+			</div>
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">비밀번호</label>
+				<div class="col-sm-5">
+					<input type="password" th:field="*{password}" class="form-control text-bg-light p-2" placeholder="비밀번호를 입력하세요">
+					<span class="validationError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password Error</span>
+				</div>
+			</div>
+			
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">이 름</label>
+				<div class="col-sm-5">
+					<input type="text" th:field="*{name}" class="form-control text-bg-light p-2" placeholder="이름을 입력하세요">
+					<span class="validationError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name Error</span>
+				</div>
+			</div>
+			
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">성 별</label>
+				<div class="col-sm-5">
+					<input th:field="*{gender}" type="radio" value="남" id="gender">남
+					<input th:field="*{gender}" type="radio" value="여" id="gender">여
+					<br>
+					<span class="validationError" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">gender Error</span>
+					<br>
+				</div>
+			</div>
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">생년월일</label>
+				<div class="col-sm-5">
+					<input th:field="*{birth}" type="text" class="form-control text-bg-light p-2" placeholder="yyyy/mm/dd" style="width:30%;padding:8px;">
+					<span class="validationError" th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}">birth Error</span>
+				</div>
+			</div>
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">이메일</label>
+				<div class="col-sm-5">
+					<input th:field="*{mail}" type="text" class="form-control text-bg-light p-2" placeholder="메일을 입력하세요">
+					<span class="validationError" th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}">mail Error</span>
+				</div>
+			</div>
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">휴대폰 번호</label>
+				<div class="col-sm-5">
+					<input th:field="*{phone}" type="text" class="form-control text-bg-light p-2" placeholder="휴대폰 번호를 입력하세요" name="phone">
+					<span class="validationError" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">phone Error</span>
+				</div>
+			</div>
+			<div class="mb-3 row d-flex justify-content-center">
+				<label class="col-sm-2 p-2">주 소</label>
+				<div class="col-sm-5">
+					<input th:field="*{address}" type="text" class="form-control text-bg-light p-2" placeholder="주소를 입력하세요" name="address">
+					<span class="validationError" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">address Error</span>
+				</div>
+			</div>
+			<div class="d-grid gap-2 col-6 mx-auto">
+				<button type="submit" class="btn btn-join btn-fade" >가입하기</button>
+			</div>
+		</form>
+		<br>
+		<th:block th:replace="fragments/footer :: footer"></th:block>
+	</div>
+</div>
+
+</body>
+</html>

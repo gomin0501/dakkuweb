@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www/ultraq.net.nz/thymeleaf/layout">
+<title>Insert title here</title>
+</head>
+<body>
+	<th:block layout:fragment="header" th:include="@{/fragments/bodyHeader}"></th:block>
+<nav class="navbar navbar-expand-lg" style="background-color: #fdd5f2;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">MealKku</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="sticker.jsp">스티커</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="maskingTape.jsp">마스킹테이프</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="dakkuBoard.jsp">자랑하기</a>
+        </li>
+      </ul>
+	  
+	  <ul class="nav justify-content-end">   
+	  <!-- 로그인이 되어 있지 않을 때 -->
+	  <th:block th:if="${session.userId == null}">
+	   
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" th:href="@{/members/new}">회원가입</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" th:href="@{/members/login}">로그인</a>
+	    </li>
+	  	</th:block>	
+	  	<!-- 관리자 로그인 -->
+	  	<th:block th:if="${session.userId == 'admin'}">
+	  	<li class="nav-item" style="padding-top: 8px; font-weight:bold; color:blue;">[관리자 모드]</li>
+	    
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="/items/new">상품등록</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="/items/list">상품목록</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="/orders/list">주문내역</a>
+	    </li>
+	  	<li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="/logout">로그아웃</a>
+	    </li>
+	    </th:block>
+	    
+	    <th:block th:if="${session.userId !='admin'} and ${session.userId != null}">
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary-emphasis" th:text="'['+${session.userId}+'님 환영합니다]'"></a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="/logout">로그아웃</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="memberView.jsp?id=<%=sessionId %>">내 정보</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="cart.jsp?id=<%=sessionId %>">장바구니</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link text-secondary-emphasis" href="orderList.jsp?id=<%=sessionId %>">주문내역</a>
+	    </li>
+	    </th:block>
+	   </ul>
+	  
+    </div>
+  </div>
+</nav>
+
+</body>
+</html>
